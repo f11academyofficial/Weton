@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hitung Weton Jawa</title>
+<style>
+:root{--bg:#f1f2f5;--card:#fff;--ink:#1c2233;--mute:#5d6578;--indigo:#232d4f;--gold:#b7852b;--line:#d9dce4}
+@media (prefers-color-scheme:dark){:root{--bg:#141829;--card:#1d2340;--ink:#eceef6;--mute:#a4abc2;--indigo:#0f1327;--gold:#e0b25a;--line:#323a5e}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Georgia,"Times New Roman",serif}
+header{background:var(--indigo);color:#f4ecd8;padding:2.2rem 1.2rem 2rem;
+background-image:repeating-linear-gradient(45deg,rgba(183,133,43,.18) 0 2px,transparent 2px 22px),repeating-linear-gradient(-45deg,rgba(183,133,43,.18) 0 2px,transparent 2px 22px)}
+header h1{margin:0;font-size:2rem;letter-spacing:.01em}
+header p{margin:.4rem 0 0;max-width:34rem;color:#d8cfb8}
+main{max-width:46rem;margin:0 auto;padding:1.2rem}
+section{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:1.2rem;margin-bottom:1.2rem}
+h2{margin:0 0 .8rem;font-size:1.2rem}
+label{display:block;font-size:.9rem;color:var(--mute);margin-bottom:.25rem}
+input{font:inherit;padding:.55rem .7rem;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:100%;max-width:14rem}
+input:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+button{font:inherit;margin-top:.8rem;padding:.55rem 1.2rem;border:0;border-radius:6px;background:var(--indigo);color:#f4ecd8;cursor:pointer}
+@media (prefers-color-scheme:dark){button{background:var(--gold);color:#141829}}
+.weton{font-size:2rem;margin:.2rem 0;color:var(--gold);font-weight:bold}
+.meta{color:var(--mute);margin:0 0 .8rem}
+dl{margin:0;display:grid;grid-template-columns:8.5rem 1fr;gap:.5rem .8rem}
+dt{color:var(--mute)}dd{margin:0}
+.row{display:flex;gap:1rem;flex-wrap:wrap}
+.hasil{margin-top:1rem}.hasil[hidden]{display:none}
+small{color:var(--mute);display:block;margin-top:.8rem}
+@media (max-width:520px){dl{grid-template-columns:1fr}dt{margin-top:.4rem}}
+</style>
+</head>
+<body>
+<header>
+<h1>Hitung Weton Jawa</h1>
+<p>Masukkan tanggal masehi untuk mengetahui hari, pasaran, neptu, dan tafsir dasarnya.</p>
+</header>
+<main>
+<section aria-labelledby="h-satu">
+<h2 id="h-satu">Weton satu tanggal</h2>
+<label for="tgl1">Tanggal lahir atau tanggal lain</label>
+<input type="date" id="tgl1" value="1985-05-12">
+<div><button id="btn1" type="button">Hitung weton</button></div>
+<div class="hasil" id="out1" hidden aria-live="polite"></div>
+</section>
+
+<section aria-labelledby="h-dua">
+<h2 id="h-dua">Kecocokan dua weton</h2>
+<div class="row">
+<div><label for="p1">Tanggal pertama</label><input type="date" id="p1"></div>
+<div><label for="p2">Tanggal kedua</label><input type="date" id="p2"></div>
+</div>
+<button id="btn2" type="button">Cek kecocokan</button>
+<div class="hasil" id="out2" hidden aria-live="polite"></div>
+</section>
+
+<small>Tafsir berasal dari tradisi primbon dan berbeda antar daerah. Gunakan sebagai pengetahuan budaya, bukan ramalan pasti.</small>
+</main>
+
+<script>
+const HARI=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+const PASARAN=["Legi","Pahing","Pon","Wage","Kliwon"];
+const N_HARI=[5,4,3,7,8,6,9];
+const N_PASARAN=[5,9,7,4,8];
+
+// 1 Januari 1970 = Kamis Wage (indeks pasaran 3)
+function weton(iso){
+  const [y,m,d]=iso.split("-").map(Number);
+  const t=new Date(Date.UTC(y,m-1,d));
+  const hari=t.getUTCDay();
+  const hariSejak=Math.round(t.getTime()/86400000);
+  const pasaran=(((hariSejak+3)%5)+5)%5;
+  return {hari,pasaran,nh:HARI[hari],np:PASARAN[pasaran],neptu:N_HARI[hari]+N_PASARAN[pasaran]};
+}
+
+// Tafsir ringkas (tradisi umum, bisa diganti dengan tafsir primbon pilihan Anda)
+const WATAK_PASARAN=[
+ "Legi: ramah, mudah bergaul, murah hati, tetapi kadang kurang tegas.",
+ "Pahing: ulet, berkemauan keras, mandiri, cenderung tertutup.",
+ "Pon: teguh pendirian, pandai menyimpan rahasia, kadang keras kepala.",
+ "Wage: tenang, tekun, sabar, cenderung pendiam dan pemikir.",
+ "Kliwon: peka, intuitif, berwibawa, kadang mudah curiga."
+];
+const WATAK_HARI=[
+ "Minggu: berjiwa pemimpin, percaya diri, suka tampil.",
+ "Senin: lembut, perasa, setia pada keluarga.",
+ "Selasa: berani, tegas, sedikit temperamental.",
+ "Rabu: bijak, rapi, suka merencanakan.",
+ "Kamis: berbudi, religius, dihormati lingkungan.",
+ "Jumat: luwes, menarik, pandai menjaga hubungan.",
+ "Sabtu: tekun, hemat, kuat menghadapi ujian."
+];
+const PASANGAN=["","Pegat","Ratu","Jodoh","Topo","Tinari","Padu","Sujanan","Pesthi"];
+const ARTI_PASANGAN={
+ "Pegat":"Dianggap rawan ujian dan perbedaan; perlu banyak pengertian.",
+ "Ratu":"Dianggap mendapat wibawa dan dihormati lingkungan.",
+ "Jodoh":"Dianggap saling melengkapi dan serasi.",
+ "Topo":"Dianggap diawali kesulitan, lalu membaik setelah bersabar.",
+ "Tinari":"Dianggap mudah mendapat rezeki dan kebahagiaan.",
+ "Padu":"Dianggap sering berselisih, tetapi bisa rukun bila saling mengalah.",
+ "Sujanan":"Dianggap rawan godaan dan kecemburuan.",
+ "Pesthi":"Dianggap tenteram, rukun, dan langgeng."
+};
+
+const fmt=iso=>new Date(iso+"T00:00:00Z").toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
+const el=id=>document.getElementById(id);
+
+el("btn1").addEventListener("click",()=>{
+  const v=el("tgl1").value, out=el("out1");
+  if(!v){out.hidden=false;out.textContent="Pilih tanggal terlebih dahulu.";return}
+  const w=weton(v);
+  out.hidden=false;
+  out.innerHTML=`<p class="meta">${fmt(v)}</p>
+  <p class="weton">${w.nh} ${w.np}</p>
+  <dl>
+   <dt>Neptu hari</dt><dd>${N_HARI[w.hari]}</dd>
+   <dt>Neptu pasaran</dt><dd>${N_PASARAN[w.pasaran]}</dd>
+   <dt>Neptu weton</dt><dd><strong>${w.neptu}</strong></dd>
+   <dt>Watak hari</dt><dd>${WATAK_HARI[w.hari]}</dd>
+   <dt>Watak pasaran</dt><dd>${WATAK_PASARAN[w.pasaran]}</dd>
+  </dl>`;
+});
+
+el("btn2").addEventListener("click",()=>{
+  const a=el("p1").value,b=el("p2").value,out=el("out2");
+  out.hidden=false;
+  if(!a||!b){out.textContent="Isi kedua tanggal terlebih dahulu.";return}
+  const x=weton(a),y=weton(b);
+  const total=x.neptu+y.neptu;
+  const sisa=total%8||8;
+  const nama=PASANGAN[sisa];
+  out.innerHTML=`<dl>
+   <dt>Weton pertama</dt><dd>${x.nh} ${x.np} (neptu ${x.neptu})</dd>
+   <dt>Weton kedua</dt><dd>${y.nh} ${y.np} (neptu ${y.neptu})</dd>
+   <dt>Jumlah neptu</dt><dd>${total}, sisa bagi 8 = ${sisa}</dd>
+   <dt>Kategori</dt><dd><strong>${nama}</strong>. ${ARTI_PASANGAN[nama]}</dd>
+  </dl>`;
+});
+</script>
+</body>
+</html>
