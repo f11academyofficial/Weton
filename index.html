@@ -29,6 +29,25 @@ dt{color:var(--mute)}dd{margin:0}
 .hasil{margin-top:1rem}.hasil[hidden]{display:none}
 .banner{display:block;margin:0 0 1.2rem}.banner img{display:block;width:100%;height:auto;border-radius:8px}
 small{color:var(--mute);display:block;margin-top:.8rem}
+.hasil h3{font-size:1.05rem;margin:1.2rem 0 .3rem;color:var(--gold)}
+.hasil .isi{margin:.2rem 0 .6rem}
+.hasil hr{border:0;border-top:1px solid var(--line);margin:1rem 0}
+.aksi{margin-top:.6rem}
+.aksi button{margin:.4rem .4rem 0 0;background:transparent;color:var(--ink);border:1px solid var(--line);padding:.4rem .8rem;font-size:.9rem}
+.aksi .status{font-size:.85rem;color:var(--mute);margin-left:.2rem}
+.daftar{margin:.2rem 0 .6rem;padding-left:1.2rem}
+.daftar li{margin:.15rem 0}
+@media print{
+body[data-print]{--bg:#fff;--card:#fff;--ink:#000;--mute:#333;--gold:#7a5410;--line:#999}
+body[data-print] header,body[data-print] .banner,body[data-print] .faq,body[data-print] small,body[data-print] .aksi,body[data-print] button,body[data-print] section:not(.cetak){display:none}
+}
+.faq details{border-top:1px solid var(--line);padding:.2rem 0}
+.faq details:first-of-type{border-top:0}
+.faq summary{cursor:pointer;padding:.6rem 0;font-weight:bold;list-style-position:outside}
+.faq summary:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.faq details p,.faq details ul{margin:.1rem 0 .8rem;color:var(--mute)}
+.faq details ul{padding-left:1.2rem}
+.faq .upd{margin:.8rem 0 0}
 @media (max-width:520px){dl{grid-template-columns:1fr}dt{margin-top:.4rem}}
 </style>
 </head>
@@ -38,15 +57,16 @@ small{color:var(--mute);display:block;margin-top:.8rem}
 <p>Masukkan tanggal masehi untuk mengetahui hari, pasaran, neptu, dan tafsir dasarnya.</p>
 </header>
 <main>
-<section aria-labelledby="h-satu">
+<section id="s1" aria-labelledby="h-satu">
 <h2 id="h-satu">Weton satu tanggal</h2>
 <label for="tgl1">Tanggal lahir atau tanggal lain</label>
 <input type="date" id="tgl1" value="2000-01-01">
 <div><button id="btn1" type="button">Hitung weton</button></div>
 <div class="hasil" id="out1" hidden aria-live="polite"></div>
+<div class="aksi" id="aksi1" hidden></div>
 </section>
 
-<section aria-labelledby="h-dua">
+<section id="s2" aria-labelledby="h-dua">
 <h2 id="h-dua">Kecocokan dua weton</h2>
 <div class="row">
 <div><label for="p1">Tanggal pertama</label><input type="date" id="p1"></div>
@@ -54,11 +74,79 @@ small{color:var(--mute);display:block;margin-top:.8rem}
 </div>
 <button id="btn2" type="button">Cek kecocokan</button>
 <div class="hasil" id="out2" hidden aria-live="polite"></div>
+<div class="aksi" id="aksi2" hidden></div>
+</section>
+
+<section id="s3" aria-labelledby="h-tiga">
+<h2 id="h-tiga">Hari ini dan hari baik</h2>
+<p class="meta" id="hariini"></p>
+<label for="tgl3">Tanggal lahir Anda</label>
+<input type="date" id="tgl3">
+<div><button id="btn3" type="button">Lihat hari baik</button></div>
+<div class="hasil" id="out3" hidden aria-live="polite"></div>
+<div class="aksi" id="aksi3" hidden></div>
 </section>
 
 <a class="banner" href="https://f11academyofficial.github.io/Analisa/" target="_blank" rel="noopener" aria-label="F11 Academy: numerologi nama dan tanggal lahir, coba sekarang">
 <img src="banner.gif" width="728" height="90" alt="F11 Academy: Bedah namamu, petakan potensimu. Numerologi nama dan tanggal lahir bersama Fino. Coba sekarang">
 </a>
+
+<section class="faq" id="faq" aria-labelledby="h-faq">
+<h2 id="h-faq">FAQ privasi dan kebijakan penggunaan</h2>
+
+<details>
+<summary>Apakah tanggal yang saya masukkan disimpan atau dikirim?</summary>
+<p>Tidak. Seluruh perhitungan berjalan di browser Anda. Halaman ini tidak mengirim tanggal ke server mana pun, tidak menyimpannya, dan tidak meminta akun, nama, atau data pribadi lain.</p>
+</details>
+
+<details>
+<summary>Apakah halaman ini memakai cookie, pelacak, atau analitik?</summary>
+<p>Halaman ini sendiri tidak memasang cookie, pelacak, maupun analitik. Perlu diketahui, halaman dihosting di GitHub Pages, dan penyedia hosting dapat mencatat data teknis kunjungan seperti alamat IP sesuai kebijakan privasi mereka. Hal itu berada di luar kendali halaman ini.</p>
+</details>
+
+<details>
+<summary>Bagaimana dengan tautan dan banner ke situs lain?</summary>
+<p>Banner F11 Academy membuka situs lain di tab baru. Setelah Anda berpindah, privasi dan aturan penggunaan mengikuti situs tujuan tersebut, bukan halaman ini.</p>
+</details>
+
+<details>
+<summary>Seberapa bisa hasil weton dipercaya?</summary>
+<p>Weton, neptu, watak, dan kecocokan pasangan di sini bersumber dari tradisi primbon yang berbeda-beda antar daerah. Hasilnya untuk pengetahuan budaya dan hiburan, bukan ramalan pasti.</p>
+</details>
+
+<details>
+<summary>Apa yang tidak boleh dijadikan dasar keputusan?</summary>
+<p>Jangan jadikan hasil halaman ini satu-satunya dasar untuk keputusan penting, misalnya:</p>
+<ul>
+<li>menikah atau berpisah,</li>
+<li>kesehatan atau pengobatan,</li>
+<li>keuangan, usaha, atau urusan hukum.</li>
+</ul>
+<p>Untuk hal-hal tersebut, konsultasikan dengan orang yang berkompeten dan keluarga Anda.</p>
+</details>
+
+<details>
+<summary>Bolehkah saya memasukkan tanggal lahir orang lain?</summary>
+<p>Boleh, tetapi sebaiknya dengan sepengetahuan orang yang bersangkutan. Gunakan fitur kecocokan dengan sikap saling menghormati dan jangan dipakai untuk merendahkan atau menghakimi seseorang.</p>
+</details>
+
+<details>
+<summary>Apa ketentuan penggunaan halaman ini?</summary>
+<ul>
+<li>Gratis dipakai untuk keperluan pribadi dan edukasi budaya.</li>
+<li>Halaman disediakan apa adanya, tanpa jaminan keakuratan atau ketersediaan.</li>
+<li>Mohon tidak menyalin ulang atau menjual ulang halaman ini tanpa izin pembuatnya.</li>
+<li>Pembuat tidak bertanggung jawab atas keputusan yang diambil berdasarkan hasil di halaman ini.</li>
+</ul>
+</details>
+
+<details>
+<summary>Apakah kebijakan ini bisa berubah?</summary>
+<p>Ya. Jika ada perubahan pada cara halaman ini bekerja, FAQ ini akan diperbarui dan tanggal pembaruan di bawah akan berubah.</p>
+</details>
+
+<p class="upd"><small>Terakhir diperbarui: 28 November 2026</small></p>
+</section>
 
 <small>Tafsir berasal dari tradisi primbon dan berbeda antar daerah. Gunakan sebagai pengetahuan budaya, bukan ramalan pasti.</small>
 </main>
@@ -79,37 +167,78 @@ function weton(iso){
   return {hari,pasaran,nh:HARI[hari],np:PASARAN[pasaran],neptu:N_HARI[hari]+N_PASARAN[pasaran]};
 }
 
-// Tafsir ringkas (tradisi umum, bisa diganti dengan tafsir primbon pilihan Anda)
-const WATAK_PASARAN=[
- "Legi: ramah, mudah bergaul, murah hati, tetapi kadang kurang tegas.",
- "Pahing: ulet, berkemauan keras, mandiri, cenderung tertutup.",
- "Pon: teguh pendirian, pandai menyimpan rahasia, kadang keras kepala.",
- "Wage: tenang, tekun, sabar, cenderung pendiam dan pemikir.",
- "Kliwon: peka, intuitif, berwibawa, kadang mudah curiga."
+// Tafsir berdasarkan tradisi primbon umum; berbeda antar daerah dan bisa disesuaikan
+const HARI_INFO=[
+{planet:"Matahari (Surya)",watak:"Berjiwa pemimpin, percaya diri, hangat, dan kehadirannya mudah menghidupkan suasana.",kuat:"keberanian mengambil inisiatif dan optimisme yang menular",tantang:"terlalu menuntut diri maupun orang lain, serta kurang nyaman bila tidak dihargai",bidang:"kepemimpinan, mengajar, tampil di depan umum, dan usaha sendiri",saran:"beri ruang bagi pendapat orang lain, karena kepemimpinan yang kuat adalah yang mau mendengar"},
+{planet:"Bulan (Soma)",watak:"Lembut, perasa, penyayang, dan setia pada keluarga serta orang terdekat.",kuat:"empati, intuisi, dan kemampuan merawat hubungan",tantang:"mudah terbawa suasana hati dan cenderung memendam perasaan",bidang:"pengasuhan, pendidikan, konseling, seni, dan pelayanan",saran:"belajar menyampaikan perasaan dengan terus terang agar tidak menumpuk"},
+{planet:"Mars (Anggara)",watak:"Berani, tegas, bersemangat, dan lugas dalam berbicara maupun bertindak.",kuat:"daya juang dan kecepatan bertindak",tantang:"mudah tersulut emosi dan cenderung tergesa-gesa",bidang:"kerja lapangan, olahraga, teknik, wirausaha, dan pembelaan hak",saran:"tarik napas sebelum bereaksi dan salurkan energi lewat gerak atau kerja nyata"},
+{planet:"Merkurius (Buda)",watak:"Bijak, rapi, cerdas, dan suka merencanakan segala sesuatu dengan matang.",kuat:"kemampuan menganalisis, berkomunikasi, dan menyesuaikan diri",tantang:"terlalu banyak berpikir sehingga sulit memulai",bidang:"menulis, administrasi, riset, perdagangan, dan teknologi",saran:"mulai dari langkah kecil tanpa menunggu rencana yang sempurna"},
+{planet:"Jupiter (Respati)",watak:"Berbudi, religius, bijaksana, dan dihormati lingkungan.",kuat:"integritas, kemurahan hati, dan sifat dapat dipercaya",tantang:"terlalu menjaga citra dan sulit berkata tidak",bidang:"pendidikan, pembinaan, keagamaan, hukum, dan layanan masyarakat",saran:"jaga batas diri agar kebaikan tidak menguras tenaga"},
+{planet:"Venus (Sukra)",watak:"Luwes, menawan, pandai menjaga hubungan, dan peka terhadap keindahan.",kuat:"diplomasi, selera estetika, dan kemampuan menenangkan suasana",tantang:"menghindari konflik dan terlalu ingin disukai",bidang:"desain, seni, pelayanan, penjualan, dan mediasi",saran:"berani jujur walaupun terasa tidak nyaman"},
+{planet:"Saturnus (Saniscara)",watak:"Tekun, hemat, disiplin, dan kuat menghadapi ujian hidup.",kuat:"daya tahan, rasa tanggung jawab, dan perencanaan jangka panjang",tantang:"terlalu serius dan sulit bersantai",bidang:"keuangan, pertukangan, pertanian, manajemen, dan pekerjaan yang menuntut ketekunan",saran:"sisihkan waktu untuk bersenang-senang dan beristirahat"}
 ];
-const WATAK_HARI=[
- "Minggu: berjiwa pemimpin, percaya diri, suka tampil.",
- "Senin: lembut, perasa, setia pada keluarga.",
- "Selasa: berani, tegas, sedikit temperamental.",
- "Rabu: bijak, rapi, suka merencanakan.",
- "Kamis: berbudi, religius, dihormati lingkungan.",
- "Jumat: luwes, menarik, pandai menjaga hubungan.",
- "Sabtu: tekun, hemat, kuat menghadapi ujian."
+const PASARAN_INFO=[
+{arah:"timur",warna:"putih",watak:"Ramah, ringan tangan, mudah bergaul, dan murah hati.",kuat:"kemampuan membangun hubungan dan kedermawanan",tantang:"kurang tegas dan sulit menolak permintaan",bidang:"perdagangan, layanan, dan hubungan masyarakat",saran:"belajar menetapkan batas dengan sopan"},
+{arah:"selatan",warna:"merah",watak:"Ulet, berkemauan keras, mandiri, dan penuh semangat.",kuat:"fokus pada tujuan dan kemandirian",tantang:"cenderung tertutup dan enggan meminta tolong",bidang:"usaha mandiri, produksi, dan profesi teknis",saran:"percayakan sebagian pekerjaan kepada orang lain"},
+{arah:"barat",warna:"kuning",watak:"Teguh pendirian, pandai menyimpan rahasia, dan setia pada prinsip.",kuat:"konsistensi dan sifat dapat dipercaya",tantang:"keras kepala bila sudah yakin",bidang:"penasihat, keuangan, pengelolaan, dan penjagaan keamanan",saran:"tetap terbuka terhadap cara pandang lain"},
+{arah:"utara",warna:"hitam",watak:"Tenang, tekun, sabar, dan cenderung pendiam serta pemikir.",kuat:"kesabaran dan kedalaman berpikir",tantang:"memendam pikiran dan terlambat menyampaikan isi hati",bidang:"riset, menulis, kerajinan, keilmuan, dan pekerjaan yang membutuhkan fokus",saran:"bagikan pikiran Anda, karena orang lain tidak bisa menebaknya"},
+{arah:"tengah (pancer)",warna:"beraneka warna",watak:"Peka, intuitif, berwibawa, dan memiliki sisi batin yang kuat.",kuat:"kepekaan membaca keadaan dan wibawa alami",tantang:"mudah curiga dan terlalu menyerap perasaan sekitar",bidang:"pembimbingan, seni, kegiatan spiritual, dan penyembuhan",saran:"periksa fakta terlebih dahulu sebelum menarik kesimpulan"}
 ];
+const NEPTU={
+7:"Pembawaan tenang dan berhati-hati. Ketelitian menjadi kekuatan, sedangkan keberanian mengambil keputusan perlu terus dilatih.",
+8:"Seimbang dan mudah menyesuaikan diri. Rezeki cenderung datang lewat pekerjaan yang stabil dan hubungan yang baik dengan orang lain.",
+9:"Dikaitkan dengan daya tahan dan pengaruh yang halus namun terasa. Mampu memimpin tanpa banyak bicara, tetapi perlu menjaga agar tidak memikul semuanya sendiri.",
+10:"Berkemauan kuat dan tekun. Keberhasilan sering datang lewat proses yang panjang, dan akan terasa lebih ringan bila mau menerima bantuan.",
+11:"Pandai bergaul dan membaca situasi. Peluang sering datang lewat jaringan pertemanan, asalkan konsistensi tetap dijaga.",
+12:"Berwibawa dan berprinsip. Mudah dipercaya memegang tanggung jawab, namun perlu belajar bersikap lebih lentur.",
+13:"Gigih, mandiri, dan kreatif mencari jalan keluar. Ingat untuk beristirahat agar semangat tidak habis di tengah jalan.",
+14:"Teliti dan bertanggung jawab, kuat dalam urusan keluarga maupun usaha. Hindari kekhawatiran berlebihan terhadap hal yang belum terjadi.",
+15:"Luwes, kaya gagasan, dan menarik dalam pergaulan. Fokuskan energi pada satu atau dua tujuan utama agar hasilnya matang.",
+16:"Penuh semangat dan keberanian. Kecepatan bertindak menjadi kekuatan, dan akan makin baik bila diimbangi kesabaran.",
+17:"Matang secara batin dan bijak. Sering menjadi tempat orang bertanya, namun jangan sampai memendam beban sendiri.",
+18:"Neptu tertinggi, dikaitkan dengan daya dorong dan wibawa yang besar. Pengendalian diri dan kemauan berbagi membuatnya semakin bermanfaat."
+};
 const PASANGAN=["","Pegat","Ratu","Jodoh","Topo","Tinari","Padu","Sujanan","Pesthi"];
-const ARTI_PASANGAN={
- "Pegat":"Dianggap rawan ujian dan perbedaan; perlu banyak pengertian.",
- "Ratu":"Dianggap mendapat wibawa dan dihormati lingkungan.",
- "Jodoh":"Dianggap saling melengkapi dan serasi.",
- "Topo":"Dianggap diawali kesulitan, lalu membaik setelah bersabar.",
- "Tinari":"Dianggap mudah mendapat rezeki dan kebahagiaan.",
- "Padu":"Dianggap sering berselisih, tetapi bisa rukun bila saling mengalah.",
- "Sujanan":"Dianggap rawan godaan dan kecemburuan.",
- "Pesthi":"Dianggap tenteram, rukun, dan langgeng."
+const KECOCOKAN={
+"Pegat":{arti:"Dianggap rawan ujian dan perbedaan; perlu banyak pengertian.",makna:"Dalam primbon, kategori ini dibaca sebagai pengingat untuk banyak berkomunikasi, bukan sebagai vonis. Perbedaan watak lebih mudah muncul, sehingga hubungan menuntut kesabaran.",kuat:"Belajar dari perbedaan dapat membuat keduanya lebih dewasa dan saling memahami.",perhatian:"Salah paham yang dibiarkan dapat membesar.",saran:"Bicarakan masalah sejak dini, sepakati aturan bersama, dan anggap perbedaan sebagai bahan belajar."},
+"Ratu":{arti:"Dianggap mendapat wibawa dan dihormati lingkungan.",makna:"Pasangan dipandang berwibawa dan disegani. Bersama-sama, keduanya mudah mendapat kepercayaan dari lingkungan sekitar.",kuat:"Saling menguatkan dalam peran di keluarga maupun masyarakat.",perhatian:"Wibawa yang besar dapat berubah menjadi gengsi bila tidak dijaga.",saran:"Jaga kerendahan hati dan manfaatkan pengaruh untuk hal-hal yang berguna bagi banyak orang."},
+"Jodoh":{arti:"Dianggap saling melengkapi dan serasi.",makna:"Kedua weton dipandang saling mengisi: yang satu menutup kekurangan yang lain, sehingga hubungan terasa mudah diselaraskan.",kuat:"Mudah sepaham dan nyaman dalam berbagi peran.",perhatian:"Keserasian bisa membuat lengah, sehingga hubungan tetap perlu dirawat.",saran:"Pertahankan komunikasi yang terbuka dan terus tumbuh bersama."},
+"Topo":{arti:"Dianggap diawali kesulitan, lalu membaik setelah bersabar.",makna:"Kata topo berarti bertapa atau menjalani laku. Dalam tradisi, pasangan ini diyakini melewati masa sulit di awal sebelum menemukan kemantapan.",kuat:"Ujian di awal dapat menempa kekompakan dan daya tahan.",perhatian:"Masa awal bisa terasa berat secara tenaga maupun keuangan.",saran:"Hadapi bersama dengan sabar, rencanakan keuangan dengan hati-hati, dan jangan mudah menyerah."},
+"Tinari":{arti:"Dianggap mudah mendapat rezeki dan kebahagiaan.",makna:"Pasangan ini dikaitkan dengan kemudahan rezeki dan suasana rumah yang membahagiakan.",kuat:"Peluang rezeki terbuka dan suasana hubungan cenderung hangat.",perhatian:"Rezeki yang lancar perlu dikelola agar tidak boros.",saran:"Bersyukur, kelola penghasilan dengan bijak, dan berbagi dengan sesama."},
+"Padu":{arti:"Dianggap sering berselisih, tetapi bisa rukun bila saling mengalah.",makna:"Perbedaan pendapat dianggap sering muncul. Namun kata padu juga bisa dimaknai bertemu, sehingga hubungan dapat rukun bila ada kemauan saling mengalah.",kuat:"Perdebatan yang sehat dapat memunculkan solusi yang lebih baik.",perhatian:"Perselisihan kecil dapat melebar bila dipicu emosi.",saran:"Bergantian mengalah dan pilih waktu yang tenang untuk berdiskusi."},
+"Sujanan":{arti:"Dianggap rawan godaan dan kecemburuan.",makna:"Dalam tradisi, kategori ini diingatkan untuk menjaga kepercayaan, karena rasa cemburu atau pihak ketiga mudah mengganggu keharmonisan.",kuat:"Kesadaran sejak awal membuat keduanya lebih waspada menjaga hubungan.",perhatian:"Rasa curiga yang tidak dibicarakan dapat merusak kepercayaan.",saran:"Bangun keterbukaan, sepakati batas pergaulan, dan perkuat rasa saling percaya."},
+"Pesthi":{arti:"Dianggap tenteram, rukun, dan langgeng.",makna:"Pesthi dipandang sebagai kecocokan yang paling tenteram: hubungan cenderung rukun, stabil, dan tahan lama.",kuat:"Ketenangan dan kestabilan menjadi fondasi hubungan.",perhatian:"Rutinitas yang terlalu nyaman dapat membuat hubungan hambar.",saran:"Pertahankan kebiasaan baik, saling menghargai, dan tetap sisipkan hal baru."}
 };
 
 const fmt=iso=>new Date(iso+"T00:00:00Z").toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric",timeZone:"UTC"});
 const el=id=>document.getElementById(id);
+const par=(label,teks)=>`<p class="isi"><strong>${label}:</strong> ${teks}</p>`;
+
+function tafsir(w){
+  const h=HARI_INFO[w.hari], p=PASARAN_INFO[w.pasaran];
+  return `
+  <h3>Gambaran umum</h3>
+  <p class="isi">${w.nh} ${w.np} adalah perpaduan dua unsur: hari membawa watak dasar dan cara bertindak, sedangkan pasaran memberi corak batin dan cara merasa. Neptu ${w.neptu} menjadi ukuran bobot perpaduan keduanya.</p>
+  <h3>Hari ${w.nh}</h3>
+  <p class="isi">Dikaitkan dengan ${h.planet}. ${h.watak}</p>
+  ${par("Kekuatan",h.kuat)}
+  ${par("Perlu dijaga",h.tantang)}
+  <h3>Pasaran ${w.np}</h3>
+  <p class="isi">Dikaitkan dengan arah ${p.arah} dan warna ${p.warna}. ${p.watak}</p>
+  ${par("Kekuatan",p.kuat)}
+  ${par("Perlu dijaga",p.tantang)}
+  <h3>Makna neptu ${w.neptu}</h3>
+  <p class="isi">${NEPTU[w.neptu]}</p>
+  <h3>Bidang yang cocok dikembangkan</h3>
+  ${par("Dari hari "+w.nh,h.bidang)}
+  ${par("Dari pasaran "+w.np,p.bidang)}
+  <h3>Saran pengembangan diri</h3>
+  <p class="isi">Kekuatan utama pemilik weton ini berpadu dari ${h.kuat}, serta ${p.kuat}. Untuk menyeimbangkannya: ${h.saran}; dan ${p.saran}.</p>`;
+}
+function ringkas(w){
+  const h=HARI_INFO[w.hari], p=PASARAN_INFO[w.pasaran];
+  return `${h.watak} ${p.watak}`;
+}
 
 el("btn1").addEventListener("click",()=>{
   const v=el("tgl1").value, out=el("out1");
@@ -122,9 +251,8 @@ el("btn1").addEventListener("click",()=>{
    <dt>Neptu hari</dt><dd>${N_HARI[w.hari]}</dd>
    <dt>Neptu pasaran</dt><dd>${N_PASARAN[w.pasaran]}</dd>
    <dt>Neptu weton</dt><dd><strong>${w.neptu}</strong></dd>
-   <dt>Watak hari</dt><dd>${WATAK_HARI[w.hari]}</dd>
-   <dt>Watak pasaran</dt><dd>${WATAK_PASARAN[w.pasaran]}</dd>
-  </dl>`;
+  </dl>
+  ${tafsir(w)}`;
 });
 
 el("btn2").addEventListener("click",()=>{
@@ -135,12 +263,150 @@ el("btn2").addEventListener("click",()=>{
   const total=x.neptu+y.neptu;
   const sisa=total%8||8;
   const nama=PASANGAN[sisa];
+  const k=KECOCOKAN[nama];
   out.innerHTML=`<dl>
    <dt>Weton pertama</dt><dd>${x.nh} ${x.np} (neptu ${x.neptu})</dd>
    <dt>Weton kedua</dt><dd>${y.nh} ${y.np} (neptu ${y.neptu})</dd>
    <dt>Jumlah neptu</dt><dd>${total}, sisa bagi 8 = ${sisa}</dd>
-   <dt>Kategori</dt><dd><strong>${nama}</strong>. ${ARTI_PASANGAN[nama]}</dd>
-  </dl>`;
+   <dt>Kategori</dt><dd><strong>${nama}</strong>. ${k.arti}</dd>
+  </dl>
+  <h3>Makna kategori ${nama}</h3>
+  <p class="isi">${k.makna}</p>
+  ${par("Kekuatan hubungan",k.kuat)}
+  ${par("Perlu diperhatikan",k.perhatian)}
+  ${par("Saran",k.saran)}
+  <h3>Pembawaan masing-masing</h3>
+  ${par(x.nh+" "+x.np,ringkas(x))}
+  ${par(y.nh+" "+y.np,ringkas(y))}
+  <p class="isi">Kecocokan dalam primbon hanyalah gambaran budaya. Keharmonisan sesungguhnya tumbuh dari saling memahami dan menghargai.</p>`;
+});
+
+// ===== Hari ini, hari baik, bagikan, dan simpan =====
+const KATEGORI_BAIK=["Ratu","Jodoh","Tinari","Pesthi"];
+const isoLokal=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+const isoTambah=(iso,n)=>{const [y,m,d]=iso.split("-").map(Number);return new Date(Date.UTC(y,m-1,d+n)).toISOString().slice(0,10)};
+const namaTgl=iso=>{const w=weton(iso);return `${w.nh} ${w.np}, ${fmt(iso)}`};
+const hariIni=isoLokal(new Date());
+(function(){const w=weton(hariIni);el("hariini").textContent=`Hari ini: ${fmt(hariIni)}, ${w.nh} ${w.np} (neptu ${w.neptu})`})();
+
+function teksWeton(v){
+  const w=weton(v),h=HARI_INFO[w.hari],p=PASARAN_INFO[w.pasaran];
+  return [`Weton Jawa: ${fmt(v)}`,`${w.nh} ${w.np} (neptu ${w.neptu})`,"",
+  `Hari ${w.nh}: ${h.watak}`,`Kekuatan: ${h.kuat}.`,"",
+  `Pasaran ${w.np}: ${p.watak}`,`Kekuatan: ${p.kuat}.`,"",
+  `Makna neptu ${w.neptu}: ${NEPTU[w.neptu]}`,"",
+  `Saran: ${h.saran}; dan ${p.saran}.`].join("\n");
+}
+function teksCocok(a,b){
+  const x=weton(a),y=weton(b),total=x.neptu+y.neptu,sisa=total%8||8,nama=PASANGAN[sisa],k=KECOCOKAN[nama];
+  return [`Kecocokan weton: ${x.nh} ${x.np} dan ${y.nh} ${y.np}`,
+  `Jumlah neptu ${total}, kategori ${nama}`,"",k.makna,"",
+  `Kekuatan: ${k.kuat}`,`Perlu diperhatikan: ${k.perhatian}`,`Saran: ${k.saran}`].join("\n");
+}
+function hariBaik(b){
+  const wb=weton(b),sel=[],baik=[];
+  for(let i=0;i<=100;i++){
+    const iso=isoTambah(hariIni,i),wd=weton(iso);
+    if(wd.hari===wb.hari&&wd.pasaran===wb.pasaran&&sel.length<3)sel.push({iso,i});
+    if(i<=13){
+      const nama=PASANGAN[(wb.neptu+wd.neptu)%8||8];
+      if(KATEGORI_BAIK.includes(nama))baik.push({iso,i,nama});
+    }
+  }
+  const ket=i=>i===0?" (hari ini)":i===1?" (besok)":"";
+  const li=(l)=>l.map(o=>`<li>${namaTgl(o.iso)}${o.nama?` &ndash; ${o.nama}`:""}${ket(o.i)}</li>`).join("");
+  const tx=(l)=>l.map(o=>`- ${namaTgl(o.iso)}${o.nama?` (${o.nama})`:""}${ket(o.i)}`).join("\n");
+  const html=`<p class="meta">Weton Anda: <strong>${wb.nh} ${wb.np}</strong> (neptu ${wb.neptu})</p>
+  <h3>Hari weton Anda (selapan)</h3>
+  <p class="isi">Weton Anda kembali setiap 35 hari. Dalam tradisi, hari ini dikenal sebagai selapan dan dianggap hari istimewa untuk bersyukur, berdoa, dan merenung.</p>
+  <ul class="daftar">${li(sel)}</ul>
+  <h3>Hari yang selaras 14 hari ke depan</h3>
+  <p class="isi">Dihitung dengan cara yang sama seperti kecocokan di atas. Hari dengan kategori Ratu, Jodoh, Tinari, atau Pesthi dianggap selaras dengan weton Anda.</p>
+  <ul class="daftar">${li(baik)}</ul>
+  <p class="isi">Hari baik untuk hajat tertentu seperti menikah atau pindah rumah memakai perhitungan yang lebih rumit. Untuk itu, tanyakan kepada sesepuh atau ahli primbon.</p>`;
+  const text=`Hari baik untuk weton ${wb.nh} ${wb.np}\n\nHari weton (selapan):\n${tx(sel)}\n\nHari selaras 14 hari ke depan:\n${tx(baik)}`;
+  return {html,text};
+}
+
+el("btn3").addEventListener("click",()=>{
+  const v=el("tgl3").value,out=el("out3");
+  out.hidden=false;
+  if(!v){out.textContent="Isi tanggal lahir terlebih dahulu.";return}
+  const r=hariBaik(v);
+  out.innerHTML=r.html;
+  tampilAksi("3",r.text,"Hari baik menurut weton");
+});
+el("btn1").addEventListener("click",()=>{
+  const v=el("tgl1").value;if(!v)return;
+  tampilAksi("1",teksWeton(v),"Weton Jawa "+fmt(v));
+});
+el("btn2").addEventListener("click",()=>{
+  const a=el("p1").value,b=el("p2").value;if(!a||!b)return;
+  tampilAksi("2",teksCocok(a,b),"Kecocokan weton");
+});
+
+const last={};
+const urlHalaman=()=>location.href.split("#")[0];
+["1","2","3"].forEach(id=>{
+  const c=el("aksi"+id);c.dataset.id=id;
+  c.innerHTML='<button type="button" data-act="share">Bagikan</button><button type="button" data-act="wa">WhatsApp</button><button type="button" data-act="copy">Salin teks</button><button type="button" data-act="img">Simpan gambar</button><button type="button" data-act="print">Cetak / PDF</button><span class="status" role="status"></span>';
+  if(!navigator.share)c.querySelector('[data-act="share"]').remove();
+});
+function tampilAksi(id,teks,judul){last[id]={teks,judul};el("aksi"+id).hidden=false}
+function status(c,msg){const s=c.querySelector(".status");s.textContent=msg;setTimeout(()=>{s.textContent=""},3000)}
+
+async function salin(teks){
+  try{await navigator.clipboard.writeText(teks);return true}catch(e){}
+  try{const t=document.createElement("textarea");t.value=teks;t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();const ok=document.execCommand("copy");t.remove();return ok}catch(e){return false}
+}
+function simpanGambar(teks,judul){
+  const W=900,pad=48,lh=30,font='20px Georgia,"Times New Roman",serif';
+  const c=document.createElement("canvas"),x=c.getContext("2d");
+  x.font=font;
+  const maxW=W-pad*2,baris=[];
+  teks.split("\n").forEach(par=>{
+    if(!par){baris.push("");return}
+    let cur="";
+    par.split(" ").forEach(kata=>{
+      const uji=cur?cur+" "+kata:kata;
+      if(x.measureText(uji).width>maxW&&cur){baris.push(cur);cur=kata}else cur=uji;
+    });
+    baris.push(cur);
+  });
+  const H=pad*2+70+baris.length*lh+50;
+  c.width=W;c.height=H;
+  x.fillStyle="#fff";x.fillRect(0,0,W,H);
+  x.fillStyle="#232d4f";x.fillRect(0,0,W,12);
+  x.fillStyle="#b7852b";x.font='bold 28px Georgia,"Times New Roman",serif';x.fillText(judul,pad,pad+24);
+  x.font=font;x.fillStyle="#1c2233";
+  baris.forEach((b,i)=>x.fillText(b,pad,pad+80+i*lh));
+  x.fillStyle="#5d6578";x.font='16px Georgia,"Times New Roman",serif';
+  x.fillText("Hitung weton Anda: "+urlHalaman(),pad,H-pad+10);
+  c.toBlob(blob=>{
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob);a.download="weton.png";
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  },"image/png");
+}
+function cetak(id){
+  const sec=el("s"+id);
+  sec.classList.add("cetak");document.body.dataset.print=id;
+  const bersih=()=>{sec.classList.remove("cetak");delete document.body.dataset.print;window.removeEventListener("afterprint",bersih)};
+  window.addEventListener("afterprint",bersih);
+  window.print();
+}
+document.addEventListener("click",async e=>{
+  const btn=e.target.closest(".aksi button[data-act]");if(!btn)return;
+  const c=btn.closest(".aksi"),d=last[c.dataset.id];if(!d)return;
+  const teks=d.teks+"\n\nHitung weton Anda: "+urlHalaman();
+  switch(btn.dataset.act){
+    case "share":try{await navigator.share({title:d.judul,text:d.teks,url:urlHalaman()})}catch(err){}break;
+    case "wa":window.open("https://wa.me/?text="+encodeURIComponent(teks),"_blank","noopener");break;
+    case "copy":status(c,(await salin(teks))?"Teks tersalin":"Gagal menyalin");break;
+    case "img":simpanGambar(d.teks,d.judul);status(c,"Gambar disimpan");break;
+    case "print":cetak(c.dataset.id);break;
+  }
 });
 </script>
 </body>
